@@ -46,10 +46,8 @@ always_ff @(posedge i_clk) begin
 end
 
 // read logic
-always_ff @(posedge i_clk) begin
-    if (!i_rst_n) begin
-        o_RD <= 0;
-    end else if (!i_WE) begin
+always_comb begin
+    if (!i_WE) begin
         o_RD <= {mem[i_A+3], mem[i_A+2], mem[i_A+1], mem[i_A]};
     end
 end

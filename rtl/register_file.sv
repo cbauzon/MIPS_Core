@@ -43,23 +43,14 @@ always_ff @(posedge i_clk) begin
     end
 end
 
-// o_RD1 logic
-always_ff @(posedge i_clk) begin
-    if (!i_rst_n) begin
-        o_RD1 <= 0;
-    end else begin
-        o_RD1 <= rf[i_A1];
-    end
+
+// read logic
+always_comb begin
+    o_RD1 = rf[i_A1];
+    o_RD2 = rf[i_A2];
 end
 
-// o_RD2 logic
-always_ff @(posedge i_clk) begin
-    if (!i_rst_n) begin
-        o_RD2 <= 0;
-    end else begin
-        o_RD2 <= rf[i_A2];
-    end
-end
+
 
 // write logic
 always_ff @(posedge i_clk) begin
