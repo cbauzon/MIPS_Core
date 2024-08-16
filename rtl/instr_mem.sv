@@ -21,14 +21,20 @@
 
 
 module instr_mem(
-    input [15:0] i_A,
+    input i_clk,
+    input [12:0] i_A,
     output logic [31:0] o_RD
 );
 
 // instantiate memory (byte addressable)
-(* ram_style="block" *) logic [7:0] mem [65535:0];
+(* ram_style = "block" *) logic [31:0] mem [2**13-1:0];
 
-always_comb begin
-    o_RD = {mem[i_A+3], mem[i_A+2], mem[i_A+1], mem[i_A]};
+initial begin
+    $readmemh("memdump.mem", mem, 0, 2**13-1);
+end
+
+
+always_ff @(posedge i_clk) begin
+   o_RD <= mem[i_A];
 end
 endmodule
