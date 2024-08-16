@@ -24,7 +24,7 @@ module data_mem(
     input i_clk,
     input i_rst_n,
     
-    input [31:0] i_A, 
+    input [15:0] i_A, 
     input [31:0] i_WD,
     input i_WE,
     
@@ -32,14 +32,13 @@ module data_mem(
 );
 
 // create memory
-logic [7:0] mem [(2**32)-1:0];
+logic [7:0] mem [(2**16)-1:0];
 
 // resetting memory
 integer i;
-logic [31:0] MEM_HEIGHT = (2**32)-1;
 always_ff @(posedge i_clk) begin
     if (!i_rst_n) begin
-        for (i=0; i< MEM_HEIGHT; ++i) begin
+        for (i=0; i< 65535; ++i) begin
             mem[i] <= 0;
         end
     end

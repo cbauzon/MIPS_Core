@@ -23,8 +23,8 @@
 module program_counter(
     input i_clk,
     input i_rst_n,
-    input [31:0] i_prev_PC,
-    output logic [31:0] o_curr_PC
+    input [15:0] i_prev_PC,
+    output logic [15:0] o_curr_PC
 );
     
     always_ff @(posedge i_clk) begin

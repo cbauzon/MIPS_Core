@@ -26,12 +26,12 @@ module single_cycle_mips(
 );
 
 /* PROGRAM COUNTER */ 
-logic [31:0] prev_PC, curr_PC;
+logic [15:0] prev_PC, curr_PC;
 program_counter pc(
     .i_clk      (i_clk),
     .i_rst_n    (i_rst_n),
     .i_prev_PC  (prev_PC),
-    .i_curr_PC  (curr_PC)
+    .o_curr_PC  (curr_PC)
 );
 
 /* INSTRUCTION MEMORY */
@@ -63,7 +63,7 @@ register_file rf(
 );
 
 /* ALU */
-logic [31:0] ALUResult;
+logic [15:0] ALUResult;
 logic Zero;
 alu alu(
     .i_SrcA         (RD1),
