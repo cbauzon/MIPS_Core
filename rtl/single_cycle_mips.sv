@@ -26,7 +26,7 @@ module single_cycle_mips(
 );
 
 /* PROGRAM COUNTER */ 
-logic [15:0] prev_PC, curr_PC;
+logic [31:0] prev_PC, curr_PC;
 program_counter pc(
     .i_clk      (i_clk),
     .i_rst_n    (i_rst_n),
@@ -37,7 +37,7 @@ program_counter pc(
 /* INSTRUCTION MEMORY */
 logic [31:0] instr;
 instr_mem im(
-    .i_A    (curr_PC),
+    .i_A    (curr_PC[14:2]),
     .o_RD   (instr)
 );
 
@@ -56,19 +56,19 @@ register_file rf(
     .i_A2       (instr[20:16]), 
     .i_A3       (WriteReg),
     .i_WD3      (Result),
-    .i_WE3      (),
+    .i_WE3      (RegWrite),
     
     .o_RD1      (RD1), 
     .o_RD2      (RD2)       
 );
 
 /* ALU */
-logic [15:0] ALUResult;
+logic [31:0] ALUResult;
 logic Zero;
 alu alu(
     .i_SrcA         (RD1),
     .i_SrcB         (SrcB),
-    .i_ALUControl   ('b010),
+    .i_ALUControl   (ALUControl),
 
     .o_ALUResult    (ALUResult),
     .o_zero_flag    (Zero)    
@@ -78,13 +78,29 @@ alu alu(
 logic [31:0] ReadData;
 data_mem dm(
     .i_clk      (i_clk),
-    .i_rst_n    (i_rst_n),
     
-    .i_A        (ALUResult), 
+    .i_A        (ALUResult[12:0]), 
     .i_WD       (RD2),
-    .i_WE       (),
+    .i_WE       (MemWrite),
     
     .o_RD       (ReadData)
+);
+
+/* CONTROL UNIT */
+logic MemWrite;
+logic [2:0] ALUControl;
+logic RegWrite;
+control_unit CU(
+    .i_Op           (instr[31:26]),
+    .i_Funct        (instr[5:0]),
+    
+    .o_MemtoReg     (MemtoReg),
+    .o_MemWrite     (MemWrite),
+    .o_Branch       (Branch),
+    .o_ALUControl   (ALUControl),
+    .o_ALUSrc       (ALUSrc),
+    .o_RegDst       (RegDst),
+    .o_RegWrite     (RegWrite)
 );
 
 // mem to reg mux

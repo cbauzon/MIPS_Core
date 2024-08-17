@@ -1,0 +1,13 @@
+0.7
+2020.2
+Oct 13 2023
+20:47:58
+C:/Users/CJ/HardwareProjects/MIPS_Core/MIPS_Core_project/MIPS_Core_project.sim/sim_1/behav/xsim/glbl.v,1697210495,verilog,,,,glbl,,uvm,,,,,,
+C:/Users/CJ/HardwareProjects/MIPS_Core/rtl/alu.sv,1723860569,systemVerilog,,C:/Users/CJ/HardwareProjects/MIPS_Core/rtl/control_unit.sv,,alu,,uvm,,,,,,
+C:/Users/CJ/HardwareProjects/MIPS_Core/rtl/control_unit.sv,1723855124,systemVerilog,,C:/Users/CJ/HardwareProjects/MIPS_Core/rtl/data_mem.sv,,control_unit,,uvm,,,,,,
+C:/Users/CJ/HardwareProjects/MIPS_Core/rtl/data_mem.sv,1723858283,systemVerilog,,C:/Users/CJ/HardwareProjects/MIPS_Core/rtl/instr_mem.sv,,data_mem,,uvm,,,,,,
+C:/Users/CJ/HardwareProjects/MIPS_Core/rtl/instr_mem.sv,1723852954,systemVerilog,,C:/Users/CJ/HardwareProjects/MIPS_Core/rtl/program_counter.sv,,instr_mem,,uvm,,,,,,
+C:/Users/CJ/HardwareProjects/MIPS_Core/rtl/program_counter.sv,1723859904,systemVerilog,,C:/Users/CJ/HardwareProjects/MIPS_Core/rtl/register_file.sv,,program_counter,,uvm,,,,,,
+C:/Users/CJ/HardwareProjects/MIPS_Core/rtl/register_file.sv,1723791477,systemVerilog,,C:/Users/CJ/HardwareProjects/MIPS_Core/rtl/single_cycle_mips.sv,,register_file,,uvm,,,,,,
+C:/Users/CJ/HardwareProjects/MIPS_Core/rtl/single_cycle_mips.sv,1723859947,systemVerilog,,C:/Users/CJ/HardwareProjects/MIPS_Core/testbench/single_cycle_mips_tb.sv,,single_cycle_mips,,uvm,,,,,,
+C:/Users/CJ/HardwareProjects/MIPS_Core/testbench/single_cycle_mips_tb.sv,1723858993,systemVerilog,,,,single_cycle_mips_tb,,uvm,,,,,,

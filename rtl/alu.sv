@@ -34,13 +34,6 @@ always_comb begin
 end
 
 always_comb begin
-    case(i_ALUControl)
-
-        010: begin// lw
-            o_ALUResult = i_SrcA + i_SrcB;
-        end
-
-        default: o_ALUResult = 0;
-    endcase
+    o_ALUResult = i_SrcA + i_SrcB;
 end
 endmodule

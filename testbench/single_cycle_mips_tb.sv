@@ -3,13 +3,13 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 08/15/2024 07:18:43 PM
-// Design Name: instruction memory
-// Module Name: instr_mem
+// Create Date: 08/16/2024 05:53:19 PM
+// Design Name: 
+// Module Name: single_cycle_mips_tb
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
-// Description: stores the instructions (ROM)
+// Description: 
 // 
 // Dependencies: 
 // 
@@ -20,20 +20,28 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module instr_mem(
-    input [12:0] i_A,
+module single_cycle_mips_tb();
     
-    output logic [31:0] o_RD
-);
-
-// instantiate memory (word addressable)
-(* ram_style = "block" *) logic [31:0] mem [2**13-1:0];
+logic i_clk, i_rst_n;
 
 initial begin
-    $readmemh("memdump.mem", mem, 0, 2**12-1);
+    i_clk = 0;
+    i_rst_n = 1;
+    forever #10 i_clk = ~i_clk;
 end
 
+single_cycle_mips DUT(
+    .i_clk (i_clk),
+    .i_rst_n (i_rst_n)   
+);
 
-assign o_RD = mem[i_A];
+initial begin
+@(posedge i_clk);
+i_rst_n = 0;
+@(negedge i_clk);
+i_rst_n = 1;
+#500;
+$finish;
 
+end
 endmodule

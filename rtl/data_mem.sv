@@ -22,9 +22,8 @@
 
 module data_mem(
     input i_clk,
-    input i_rst_n,
     
-    input [15:0] i_A, 
+    input [12:0] i_A, 
     input [31:0] i_WD,
     input i_WE,
     
@@ -32,31 +31,22 @@ module data_mem(
 );
 
 // create memory
-logic [7:0] mem [(2**16)-1:0];
-
-// resetting memory
-integer i;
-always_ff @(posedge i_clk) begin
-    if (!i_rst_n) begin
-        for (i=0; i< 65535; ++i) begin
-            mem[i] <= 0;
-        end
-    end
+(* ram_style="block" *) logic [31:0] mem [(2**13)-1:0];
+initial begin
+    $readmemh("memdump_mem.mem", mem, 0, 2**13-1);
 end
 
 // read logic
 always_comb begin
     if (!i_WE) begin
-        o_RD <= {mem[i_A+3], mem[i_A+2], mem[i_A+1], mem[i_A]};
+        o_RD <= mem[i_A];
     end
 end
 
 // write logic
 always_ff @(posedge i_clk) begin
     if (i_WE) begin
-        for (int i=0; i<4; ++i) begin
-            mem[i_A + i] <= i_WD[i*8+:8];
-        end
+        mem[i_A] <= i_WD;
     end
 end
 endmodule

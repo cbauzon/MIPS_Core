@@ -1,0 +1,16 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../../rtl/alu.sv" \
+"../../../../../rtl/control_unit.sv" \
+"../../../../../rtl/data_mem.sv" \
+"../../../../../rtl/instr_mem.sv" \
+"../../../../../rtl/program_counter.sv" \
+"../../../../../rtl/register_file.sv" \
+"../../../../../rtl/single_cycle_mips.sv" \
+"../../../../../testbench/single_cycle_mips_tb.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
